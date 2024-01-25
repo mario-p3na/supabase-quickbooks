@@ -1,15 +1,7 @@
 import express, { Request, Response } from "express";
-import { createClient } from "@supabase/supabase-js";
 import { run } from "graphile-worker";
 import dotenv from "dotenv";
-
-import { Database } from "./database.types";
-import createUpdateInvoiceTask from "./tasks/createUpdateInvoiceTask";
-
-interface Payload {
-  id: string;
-  // Add other fields as needed
-}
+import { createUpdateInvoiceTask } from "./tasks/createUpsertInvoiceTask";
 
 // Load environment variables
 dotenv.config();
