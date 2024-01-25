@@ -1,6 +1,9 @@
 import express, { Request, Response } from "express";
 import { run } from "graphile-worker";
 import dotenv from "dotenv";
+import queryString from "querystring";
+import request from "request";
+
 import { createUpdateInvoiceTask } from "./tasks/createUpsertInvoiceTask";
 
 // Load environment variables
@@ -12,6 +15,14 @@ app.use(express.json());
 
 // Define your webhook endpoint
 app.post("/webhook", async (req: Request, res: Response) => {
+  const webhookPayload = JSON.stringify(req.body);
+  console.log("The paylopad is :" + JSON.stringify(req.body));
+  const signature = req.get("intuit-signature");
+
+  console.log(webhookPayload);
+
+  res.status(200).send("Webhook received successfully");
+
   try {
     // Initialize the runner
     const runner = await run({
