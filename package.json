@@ -20,5 +20,8 @@
   },
   "devDependencies": {
     "@types/node": "^20.11.6"
+  },
+  "engines": {
+    "node": "18.x"
   }
 }
