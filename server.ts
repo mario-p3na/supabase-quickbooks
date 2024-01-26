@@ -1,8 +1,6 @@
 import express, { Request, Response } from "express";
 import { run } from "graphile-worker";
 import dotenv from "dotenv";
-import queryString from "querystring";
-import request from "request";
 
 import { createUpdateInvoiceTask } from "./tasks/createUpsertInvoiceTask";
 
@@ -21,8 +19,6 @@ app.post("/webhook", async (req: Request, res: Response) => {
 
   console.log(webhookPayload);
 
-  res.status(200).send("Webhook received successfully");
-
   try {
     // Initialize the runner
     const runner = await run({
@@ -30,6 +26,7 @@ app.post("/webhook", async (req: Request, res: Response) => {
       taskList: {
         createUpdateInvoiceTask: createUpdateInvoiceTask,
       },
+      noPreparedStatements: true,
     });
 
     // Add a job to the queue
