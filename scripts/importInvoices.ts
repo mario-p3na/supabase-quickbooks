@@ -1,9 +1,9 @@
 import { InvoicesPayload } from "../constants/invoice";
-import { Database } from "../database.types";
-import { upsertInvoice } from "../utils/upsertInvoice";
 import dotenv from "dotenv";
 
 const QuickBooks = require("node-quickbooks");
+
+import { upsertInvoice } from "../utils/upsertInvoice";
 
 // Load environment variables
 dotenv.config();
